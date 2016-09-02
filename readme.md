@@ -17,6 +17,10 @@ You can limit it to a specific user by specifying their email address.
 
 `gitstreak -author user@example.org path/to/repo`
 
+You can name multiple email addresses by separating them by a comma.
+
+`gitstreak -author user@example.org,another@example.org path/to/repo`
+
 If you have a single directory with all your repositories, you can easily
 include each repository.
 

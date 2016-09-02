@@ -51,6 +51,14 @@ func handlePath(path string) error {
 	// Initialize buffered reader for stdout.
 	buf := bufio.NewReader(stdout)
 
+	var authors []string
+	if *author != "" {
+		authors = strings.Split(*author, ",")
+		for i, a := range authors {
+			authors[i] = strings.Trim(a, " ")
+		}
+	}
+
 	// Read commit timestamps line by line. Parse in ISO8601 format, which is
 	// virtually identical to RFC3339.
 	for {
@@ -62,8 +70,17 @@ func handlePath(path string) error {
 		}
 		line = strings.TrimSuffix(line, "\n")
 		pieces := strings.SplitN(line, " ", 2)
-		if *author != "" && pieces[1] != *author {
-			continue
+		if *author != "" {
+			found := false
+			for _, a := range authors {
+				if pieces[1] == a {
+					found = true
+					continue
+				}
+			}
+			if !found {
+				continue
+			}
 		}
 		parse, err := time.Parse(timeFormat, pieces[0][:10])
 		if err != nil {
