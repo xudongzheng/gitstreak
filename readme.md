@@ -2,10 +2,7 @@
 
 ## Installation
 
-If you have [Go](https://golang.org/) installed, simply use `go get` to install
-gitstreak.
-
-`go get github.com/xudongzheng/gitstreak`
+`go install xudongz.com/code/gitstreak@latest`
 
 ## Usage
 
